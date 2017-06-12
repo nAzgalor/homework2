@@ -4,12 +4,16 @@
 module StateAndBehaviour
   # basic object
   class Car
-    attr_accessor :color, :model, :year, :current_speed
+    attr_reader :color, :model, :year, :current_speed
+
+    DEFAULT_COLOR_VALUE = 'color'
+    DEFAULT_MODEL_VALUE = 'model'
+    DEFAULT_YEAR_VALUE = 2000
 
     def initialize(params)
-      @color = params[:color] || 'color'
-      @model = params[:model] || 'model'
-      @year  = params[:year] || 2000
+      @color = params.fetch(:color, DEFAULT_COLOR_VALUE)
+      @model = params.fetch(:model, DEFAULT_MODEL_VALUE)
+      @year  = params.fetch(:year, DEFAULT_YEAR_VALUE)
       @current_speed = 0
     end
 
@@ -22,7 +26,7 @@ module StateAndBehaviour
     end
 
     def self.default_car
-      Car.new
+      new({})
     end
   end
 end
